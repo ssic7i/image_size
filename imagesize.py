@@ -42,3 +42,4 @@ for cur_file in find_files:
 print(k)
 result_file.write('\n')
 result_file.write('found files: ' + str(k))
+result_file.close()
