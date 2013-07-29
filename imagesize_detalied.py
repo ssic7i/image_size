@@ -65,3 +65,5 @@ print(k)
 result_file.write('\n')
 result_file.write('found files: ' + str(k))
 result_file.close()
+detalied_log.close()
+
