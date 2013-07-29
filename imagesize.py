@@ -27,6 +27,8 @@ result_file.write('root folder: ' + catalog + '\n')
 
 print('total files: ' + str(len(find_files)))
 k = 0
+sx = 0
+sy = 0
 for cur_file in find_files:
  now_ext = cur_file[len(cur_file)-4:len(cur_file)]
  if str.lower(now_ext) == '.jpg' or\
@@ -35,9 +37,23 @@ for cur_file in find_files:
     str.lower(now_ext) == '.jpe':
   img = Image.open(cur_file)
   size = img.size
-  if size[0] * size[1] > 1024 * 1024:
-   print(cur_file + ' ' + str(size[0]) + 'x' + str(size[1]) + '\n')
-   result_file.write(cur_file + ' ' + str(size[0]) + 'x' + str(size[1]) + '\n')
+  if size[0] in range(0,32): sx = 32
+  if size[0] in range(33,64): sx = 64
+  if size[0] in range(65,128): sx = 128
+  if size[0] in range(129,256): sx = 256
+  if size[0] in range(257,512): sx = 512
+  if size[0] in range(513,1024): sx = 1024
+  if size[0] in range(1025,2048): sx = 2048
+  if size[1] in range(0,32): sy = 32
+  if size[1] in range(33,64): sy = 64
+  if size[1] in range(65,128): sy = 128
+  if size[1] in range(129,256): sy = 256
+  if size[1] in range(257,512): sy = 512
+  if size[1] in range(513,1024): sy = 1024
+  if size[1] in range(1025,2048): sy = 2048
+  if sx * sy > 1024 * 1024:
+   print(cur_file + ' ' + str(size[0]) + 'x' + str(size[1]) + ' result size: ' + str(sx) + 'x' + str(sy) + '\n')
+   result_file.write(cur_file + ' ' + str(size[0]) + 'x' + str(size[1]) + ' result size: ' + str(sx) + 'x' + str(sy) + '\n')
    k = k + 1
 print(k)
 result_file.write('\n')
